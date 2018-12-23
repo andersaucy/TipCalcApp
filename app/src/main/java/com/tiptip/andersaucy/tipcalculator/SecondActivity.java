@@ -21,9 +21,6 @@ public class SecondActivity extends AppCompatActivity {
         final NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(Locale.US);
 
         if (getIntent().hasExtra("com.tiptip.andersaucy.tipcalculator.ADD")){
-            EditText dialogue = (EditText) findViewById(R.id.AMT);
-
-            EditText individual = (EditText) findViewById(R.id.INDIV);
 
             EditText addText = (EditText) findViewById(R.id.addText);
             addText.setKeyListener(null);
@@ -47,25 +44,18 @@ public class SecondActivity extends AppCompatActivity {
                                                 a2Text.getText().toString(),
                                                 a3Text.getText().toString(),
                                                 a4Text.getText().toString()};
-
-                    double sum = numberize(inputVal);
+                    double sum = 0.00;
+                    for (int i = 0; i < inputVal.length; i++){
+                        if (!inputVal[i].isEmpty()){
+                            sum += Double.parseDouble(inputVal[i]);
+                        }
+                    }
                     double payment = sum + addend;
                     paymentText.setTextColor(Color.rgb(133, 187, 101));
                     paymentText.setText(dollarFormat.format(payment));
-                   // instruction.setVisibility(View.VISIBLE);
-                   //next.setVisibility(View.VISIBLE);
                 }
             });
         }
     }
 
-    public double numberize (String[] inputVal){
-        double numberSum = 0.00;
-        for (int i = 0; i < inputVal.length; i++){
-            if (!inputVal[i].isEmpty()){
-                numberSum += Double.parseDouble(inputVal[i]);
-            }
-        }
-        return numberSum;
-    }
 }
